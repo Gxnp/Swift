@@ -1,30 +1,34 @@
-//
-//  Test.swift
-//  DemoGithub
-//
-//  Created by napon narkphan on 23/6/2567 BE.
-//
-
 import SwiftUI
 
 struct Test : View {
-    @State private var selection = "Red"
-    let colors = ["Red", "Green", "Blue", "Black", "Tartan"]
-
+    
+    @State private var isAnimating: Bool = false
+    
     var body: some View {
-        VStack {
-            Picker("Select a paint color", selection: $selection) {
-                ForEach(colors, id: \.self) {
-                    Text($0)
-                }
+        ZStack {
+            ForEach(0..<5) { index in
+                Circle()
+                    .foregroundColor(.blue)
+                    .frame(width: 50 - CGFloat(index) * 10, height: 50 - CGFloat(index) * 10)
+                    .offset(y: -100)
+                    .rotationEffect(.degrees(isAnimating ? 360 : 0))
+                    .animation(
+                        Animation.easeInOut(duration: 2 - Double(index) * 0.2)
+                            .delay(Double(index) * 0.2)
+                            .repeatForever(autoreverses: false),
+                        value: isAnimating
+                    )
             }
-            .pickerStyle(.menu)
-
-            Text("Selected color: \(selection)")
+        }
+        .onAppear {
+            isAnimating = true
         }
     }
 }
 
-#Preview {
-    Test()
+struct Test_Previews: PreviewProvider {
+    static var previews: some View {
+        Test()
+    }
 }
+

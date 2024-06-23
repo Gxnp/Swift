@@ -13,11 +13,23 @@ struct Congrat: View {
             LinearGradient(gradient: Gradient(colors: [.white, .nevBlue]), startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea(.all)
             VStack{
-                Text("Congrat Na Jaa")
+                Text("RESULT")
                     .font(.largeTitle)
                     .foregroundStyle(.nevBlue)
                     .fontWeight(.black)
+                Image("Happy")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(.horizontal)
+                VStack{
+                    Text("No Heart Disease")
+                        .font(.largeTitle)
+                        .foregroundStyle(.white)
+                        .fontWeight(.bold)
+                    Text("Confident")
+                }
                 Spacer()
+                
             }
         }
     }
